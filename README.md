@@ -70,6 +70,27 @@ echo GROQ_API_KEY=your_api_key_here > .env
 
 > ⚠️ **Replace `your_api_key_here` with your actual Groq API key.**
 
+## 8. Setup Backend using FastAPI
+#### Copy content of main.py under Backend/main.py
+```bash
+~/AI-Engineering/Backend $ uvicorn main:app --reload
+``` 
+
+## 9. Run Fast API
+#### 1. Start a new session:
+```bash
+   curl -X POST http://localhost:8000/start-session
+```
+Returns: {"session_id": "uuid-here"}
+
+#### 2. Send messages:
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"message": "Capital City of Karnataka", "session_id": "your-session-id"}' http://localhost:8000/chat
+```
+Returns: {"response": "Bengaluru", "session_id": "your-session-id"}
+
+
+
 ---
 
 ✅ You're all set! Now you can start working on the project.
