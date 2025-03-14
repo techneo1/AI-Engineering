@@ -1,4 +1,4 @@
-# Project Setup Guide
+# Quick Start
 #### 1. Run fastAPI Backend
 ```bash
 Projects/backend$ uvicorn main:app --reload
