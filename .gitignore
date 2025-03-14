@@ -179,3 +179,5 @@ node_modules/
 mlruns/
 mlartifacts/
 mlflow.db
+
+*.csv

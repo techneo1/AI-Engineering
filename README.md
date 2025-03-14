@@ -1,12 +1,14 @@
-# Quick Start
+# Quick Start - My ChatGPT
 #### 1. Run fastAPI Backend
 ```bash
-Projects/backend$ uvicorn main:app --reload
+cd backend 
+uvicorn main:app --reload
 ```
 
 #### 2. Run ReactJs Frontend
 ```bash
-Projects/frontend$ npm start
+cd frontend
+npm start
 ```
 
 #### 3. Start MLFLOW server for experiments

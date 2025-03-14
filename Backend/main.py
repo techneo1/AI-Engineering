@@ -4,7 +4,8 @@ import os
 from groq import Groq
 import uuid
 from fastapi.middleware.cors import CORSMiddleware
-
+import mlflow
+import pandas as pd
 
 from dotenv import load_dotenv
 
@@ -30,6 +31,11 @@ app.add_middleware(
 )
 # Initialize Groq client
 client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+
+# Initialize MLflow
+mlflow.set_tracking_uri(os.getenv("MLFLOW_TRACKING_URI"))
+mlflow.set_experiment("My Chat GPT")
+
 
 # System prompt configuration
 system_prompt = {
@@ -58,6 +64,7 @@ def start_session():
     """Create a new chat session"""
     session_id = str(uuid.uuid4())
     sessions[session_id] = [system_prompt.copy()]
+    
     return {"session_id": session_id}
 
 @app.post("/chat", response_model=ChatResponse)
@@ -73,7 +80,7 @@ def chat(request: ChatRequest):
     
     # Add user message to history
     chat_history.append({"role": "user", "content": request.message})
-    
+
     try:
         # Get AI response
         response = client.chat.completions.create(
@@ -88,5 +95,13 @@ def chat(request: ChatRequest):
     # Extract and store assistant response
     assistant_message = response.choices[0].message.content
     chat_history.append({"role": "assistant", "content": assistant_message})
-    
+ 
+    # Log dataset in MLflow
+    dataset = pd.DataFrame(chat_history)
+    dataset_file = f"{session_id}_chat_history.csv"
+    dataset.to_csv(dataset_file, index=False)
+
+    with mlflow.start_run(run_name=session_id, nested=True):
+        mlflow.log_artifact(dataset_file)
+
     return {"response": assistant_message, "session_id": session_id}
