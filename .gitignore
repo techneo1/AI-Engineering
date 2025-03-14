@@ -175,3 +175,7 @@ cython_debug/
 
 # node_modules
 node_modules/
+# MLflow
+mlruns/
+mlartifacts/
+mlflow.db
