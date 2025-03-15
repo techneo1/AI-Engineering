@@ -180,4 +180,7 @@ mlruns/
 mlartifacts/
 mlflow.db
 
+# data artifacts
 *.csv
+
+*.log
