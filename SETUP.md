@@ -70,8 +70,8 @@ echo GROQ_API_KEY=your_api_key_here > .env
 
 > ⚠️ **Replace `your_api_key_here` with your actual Groq API key.**
 
-## 8. Setup Backend using FastAPI
-#### Copy below content to Backend/main.py
+## 8. Setup Back-end using FastAPI
+#### Copy below content to back-end/main.py
 ```bash
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -169,7 +169,7 @@ def chat(request: ChatRequest):
 
 #### Run main.py
 ```bash
-~/AI-Engineering/Backend $ uvicorn main:app --reload
+~/AI-Engineering/back-end $ uvicorn main:app --reload
 ``` 
 
 ## 9. Run Fast API
