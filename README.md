@@ -1,4 +1,7 @@
 # Quick Start - My ChatGPT
+
+#### Pre-requisites: Follow this [Setup Guide](https://github.com/techneo1/AI-Engineering/blob/master/SETUP.md)
+
 #### 1. Run fastAPI Backend
 ```bash
 cd backend 
